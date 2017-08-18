@@ -1,0 +1,8 @@
+.Section {
+
+}
+
+.Section-inner {
+	max-width: var(--mq-xl-width);
+	margin: 0 auto;
+}

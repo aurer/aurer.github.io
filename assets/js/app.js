@@ -1,6 +1,6 @@
-const listComponent = function(props) {
-	console.log(props);
-}
+document.addEventListener('DOMContentLoaded', function(e) {
+	App.constructor();
+});
 
 const App = {
 	constructor: function(props) {
@@ -19,11 +19,9 @@ const App = {
 		let repos = JSON.parse(localStorage.getItem('repos'));
 
 		if (repos && repos.length) {
-			console.log('Fetch from cache');
 			return this.setState({repos: repos});
 		}
 
-		console.log('Fetch from API');
 		fetch('https://api.github.com/users/aurer/repos')
 		.then(res => res.json())
 		.then(res => {
@@ -36,16 +34,12 @@ const App = {
 	},
 
 	render: function() {
-		let html = '<ul>'
+		let html = '<ul class="Repos">'
 		this.state.repos.map(repo => {
 			console.log(repo);
-			html += `<li><a href="${repo.url}">${repo.name}</a></li>`;
+			html += `<li class="Repo"><a href="https://aurer.github.io/${repo.name}">${repo.name}</a></li>`;
 		});
 		html += '</ul>'
 		document.querySelector('.App').innerHTML = html;
 	}
 }
-
-document.addEventListener('DOMContentLoaded', function(e) {
-	App.constructor();
-});
