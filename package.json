@@ -1,0 +1,14 @@
+{
+  "name": "aurer.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/aurer/aurer.github.io.git",
+  "author": "Phil Maurer <philmau@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+
+  },
+  "scripts": {
+
+  }
+}
