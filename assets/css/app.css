@@ -1,16 +1,12 @@
-@import url(components/base.css);
-@import url(components/section.css);
-@import url(components/repo.css);
-
 :root {
 	/* Colors */
-	--color-primary: #157ecf;
+	--color-primary: #374C68;
 	--color-secondary: #f80a2f;
 
 	--color-neutral-lighter: #e9e9e9;
 	--color-neutral-light: #ccc;
-	--color-neutral: #999;
-	--color-neutral-dark: #666;
+	--color-neutral: #F6F9FC;
+	--color-neutral-dark: #C0C8CF;
 	--color-neutral-darker: #222;
 
 	/* Breakpoints */
@@ -19,10 +15,94 @@
 	--mq-lg-width: 60rem;
 	--mq-xl-width: 80rem;
 
-	// Spacing
+	/* Spacing */
 	--space-xs: calc(var(--space) / 4);
 	--space-sm: calc(var(--space) / 2);
 	--space: 1.5rem;
 	--space-lg: calc(var(--space) * 2);
 	--space-xl: calc(var(--space) * 3);
+}
+
+/* Base */
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: var(--color-neutral);
+	color: var(--color-primary);
+	margin: 0;
+}
+
+a {
+	color: var(--color-primary);
+	transition: color .2s;
+}
+
+a:hover {
+	color: var(--color-secondary);
+}
+
+/* Page */
+.Page {
+	height: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.Page-inner {
+	margin-bottom: 20vh;
+}
+
+h1 {
+	font-weight: 400;
+}
+
+.Section-inner {
+	max-width: var(--mq-xl-width);
+	margin: 0 auto;
+}
+
+/* Repos */
+.Repos {
+	padding: var(--space-lg) var(--space);
+	margin: var(--space-lg) auto;
+	position: relative;
+}
+
+.Repos:before,
+.Repos:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	display: block;
+	height: 1px;
+	background-image: linear-gradient(to right, var(--color-neutral), var(--color-neutral-dark), var(--color-neutral))
+}
+
+.Repos:before {
+	top: 0;
+}
+
+.Repos:after {
+	bottom: 0;
+}
+
+.Repo {
+	font-size: 1.2em;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+/* Footer */
+.Footer svg {
+	transition: fill .2s;
+}
+
+.Footer:hover svg {
+	fill: var(--color-secondary);
 }

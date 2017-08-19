@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function(e) {
-	App.constructor();
+	App.constructor(document.querySelector('.App'));
 });
 
 const App = {
-	constructor: function(props) {
+	constructor: function(rootElement) {
+		this.rootElement = rootElement;
+		this.cacheTime = 60000;
 		this.state = {
 			repos: []
 		}
@@ -15,31 +17,49 @@ const App = {
 		this.render();
 	},
 
-	fetchRepos: function() {
-		let repos = JSON.parse(localStorage.getItem('repos'));
+	fetchRepos: function(force=false) {
+		let repos = this.getCached('repos');
 
 		if (repos && repos.length) {
 			return this.setState({repos: repos});
 		}
 
+		this.rootElement.innerHTML = "Fetching Repos...";
+
 		fetch('https://api.github.com/users/aurer/repos')
-		.then(res => res.json())
-		.then(res => {
-			let repos = res.filter(repo => {
-				return repo.has_pages && repo.name != 'aurer.github.io'
+			.then(res => res.json())
+			.then(res => {
+				let repos = res.filter(repo => {
+					return repo.has_pages && repo.name != 'aurer.github.io'
+				});
+				this.setState({repos: repos})
+				this.setCached('repos', repos);
 			});
-			localStorage.setItem('repos', JSON.stringify(repos));
-			this.setState({repos: repos})
-		});
+	},
+
+	setCached: function(key, data) {
+		let times = JSON.parse(localStorage.getItem('times')) || {};
+		times[key] = new Date().getTime();
+		localStorage.setItem('times', JSON.stringify(times));
+		localStorage.setItem(key, JSON.stringify(data));
+	},
+
+	getCached: function(key) {
+		let times = JSON.parse(localStorage.getItem('times')) || {};
+		let data = JSON.parse(localStorage.getItem(key)) || [];
+
+		if (times[key] + this.cacheTime < new Date().getTime()) {
+			return false;
+		}
+
+		return data;
 	},
 
 	render: function() {
-		let html = '<ul class="Repos">'
+		let html = '';
 		this.state.repos.map(repo => {
-			console.log(repo);
-			html += `<li class="Repo"><a href="https://aurer.github.io/${repo.name}">${repo.name}</a></li>`;
+			html += `<a class="Repo" href="https://aurer.github.io/${repo.name}">${repo.name}</a>`;
 		});
-		html += '</ul>'
-		document.querySelector('.App').innerHTML = html;
+		this.rootElement.innerHTML = html;
 	}
 }
