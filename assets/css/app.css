@@ -1,13 +1,17 @@
 :root {
-	/* Colors */
-	--color-primary: #374C68;
-	--color-secondary: #f80a2f;
+	/* Neutral colors */
+	--color-neutral-lighter: hsl(210, 17%, 35%);
+	--color-neutral-light: hsl(210, 16%, 24%);
+	--color-neutral: hsl(210, 15%, 18%);
+	--color-neutral-dark: hsl(210, 17%, 12%);
+	--color-neutral-darker: hsl(210, 18%, 9%);
 
-	--color-neutral-lighter: #e9e9e9;
-	--color-neutral-light: #ccc;
-	--color-neutral: #F6F9FC;
-	--color-neutral-dark: #C0C8CF;
-	--color-neutral-darker: #222;
+	/* Primary colors */
+	--color-primary-lighter: hsl(170, 42%, 54%);
+	--color-primary-light: hsl(170, 58%, 42%);
+	--color-primary: hsl(170, 100%, 30%);
+	--color-primary-dark: hsl(170, 100%, 25%);
+	--color-primary-darker: hsl(170, 100%, 20%);
 
 	/* Breakpoints */
 	--mq-sm-width: 20rem;
@@ -24,20 +28,21 @@
 }
 
 /* Base */
-html, body {
+html,
+body {
 	height: 100%;
 }
 
 body {
 	font-family: 'Raleway', sans-serif;
 	background-color: var(--color-neutral);
-	color: var(--color-primary);
+	color: hsl(170, 100%, 100%);
 	margin: 0;
 }
 
 a {
 	color: var(--color-primary);
-	transition: color .2s;
+	transition: color 0.2s;
 }
 
 a:hover {
@@ -54,7 +59,8 @@ a:hover {
 }
 
 .Page-inner {
-	margin-bottom: 20vh;
+	margin: 0 auto 20vh;
+	max-width: var(--mq-md-width);
 }
 
 h1 {
@@ -71,17 +77,8 @@ h1 {
 	padding: var(--space-lg) var(--space);
 	margin: var(--space-lg) auto;
 	position: relative;
-}
-
-.Repos:before,
-.Repos:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	display: block;
-	height: 1px;
-	background-image: linear-gradient(to right, var(--color-neutral), var(--color-neutral-dark), var(--color-neutral))
+	border-top: 1px solid var(--color-primary);
+	border-bottom: 1px solid var(--color-primary);
 }
 
 .Repos:before {
@@ -100,17 +97,9 @@ h1 {
 	margin: var(--space-sm) auto;
 }
 
-/*.Repo + .Repo:before {
-	content: '';
-	display: block;
-	width: 2rem;
-	margin: var(--space-sm) auto;
-	border-top: 1px solid var(--color-neutral-dark);
-}*/
-
 /* Footer */
 .Footer svg {
-	transition: fill .2s;
+	transition: fill 0.2s;
 }
 
 .Footer:hover svg {
